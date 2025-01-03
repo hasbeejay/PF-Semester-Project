@@ -72,3 +72,13 @@ int main() {
 
     return 0;
 }
+
+// Display welcome message
+void welcomeScreen() {
+    cout << "        **************************************\n";
+    cout << "        *                                    *\n";
+    cout << "        *      YSKI Automotive    			  *\n";
+    cout << "        *          Management System         *\n";
+    cout << "        *                                    *\n";
+    cout << "        **************************************\n";
+}
