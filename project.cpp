@@ -151,3 +151,92 @@ void carSale(vector<Car>& cars, int& carsSold) {
         salesRecord.close();
     }
 }
+
+// Process car purchases
+void carPurchase(int& carsBought) {
+    cout << "    ============================================================" << endl;
+    cout << "    Let's Start the Purchase Process!" << endl;
+
+    vector<Car> availableCars; // Store the available cars in a vector
+    ifstream file("cars_for_sale.txt"); // Read the available cars from file
+    if (!file) {
+        cout << "    -----------------------------------------------------------" << endl;
+        cout << "    Error: Unable to open cars_for_sale.txt.\n";
+        return;
+    }
+
+    string model;
+    int year, price;
+    while (file >> model >> year >> price) { // Read car details from the file
+        availableCars.push_back({model, year, price});
+    }
+    file.close();
+
+    if (availableCars.empty()) {
+        cout << "    -----------------------------------------------------------" << endl;
+        cout << "    No cars available for sale at the moment.\n";
+        return;
+    }
+
+    char buyAnother;
+    do {
+        cout << "    Available cars for sale:\n\n";
+        cout << "    No.    \tModel & Year    \tPrice\n";
+        cout << "    -----------------------------------------------------------\n\n";
+
+        for (size_t i = 0; i < availableCars.size(); ++i) { // Display all cars
+            cout << "    " << i + 1 << "    \t" << availableCars[i].model 
+                 << " \t" << availableCars[i].year 
+                 << "    \t$"  << availableCars[i].price << endl;
+        }
+
+        int choice;
+        cout << "    -----------------------------------------------------------" << endl;
+        cout << "    Enter the number of the car you want to buy: ";
+        cin >> choice;
+
+        if (choice < 1 || choice > availableCars.size()) {
+            cout << "    Invalid choice. Please try again.\n";
+            continue;
+        }
+
+        Car purchasedCar = availableCars[choice - 1]; // Get the chosen car
+        availableCars.erase(availableCars.begin() + (choice - 1)); // Remove it from the list
+
+        cout << "    -----------------------------------------------------------" << endl;
+        cout << "    Purchase is on the way successfully! \n\n    Your ticket number is: " << generateTicket() << endl;
+        cout << "\n\n    Please visit the counter with ticket number and \n    pay the amount to get the paperwork done." << endl;
+
+        // Save purchased car details to a file
+        ofstream purchasedFile("purchased_cars.txt", ios::app);
+        if (purchasedFile) {
+            purchasedFile << "Model: " << purchasedCar.model 
+                          << ", Year: " << purchasedCar.year 
+                          << ", Price: $" << purchasedCar.price << endl;
+            purchasedFile.close();
+        }
+
+        carsBought++; // Increment the number of cars bought
+
+        cout << "    -----------------------------------------------------------" << endl;
+        cout << "\n    Do you want to buy another car? (y/n): ";
+        cin >> buyAnother;
+
+    } while (buyAnother == 'y' || buyAnother == 'Y');
+
+    // Update the cars_for_sale.txt file with the remaining cars
+    ofstream updatedFile("cars_for_sale.txt");
+    if (updatedFile) {
+        for (const auto& car : availableCars) {
+            updatedFile << car.model << " " << car.year << " " << car.price << endl;
+        }
+        updatedFile.close();
+    }
+
+    // Save the total number of cars purchased to a file
+    ofstream purchaseRecord("purchase_record.txt", ios::app);
+    if (purchaseRecord) {
+        purchaseRecord << "Total cars purchased: " << carsBought << endl;
+        purchaseRecord.close();
+    }
+}
