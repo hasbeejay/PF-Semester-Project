@@ -240,3 +240,23 @@ void carPurchase(int& carsBought) {
         purchaseRecord.close();
     }
 }
+
+// Process car modifications
+void carModifications() {
+    cout << "    ============================================================" << endl;
+    cout << "    Let's Start the Modification Process!" << endl;
+    Ticket modificationTicket;
+    modificationTicket.ticketNumber = generateTicket();
+    modificationTicket.serviceType = "Car Modification";
+    cout << "    -----------------------------------------------------------" << endl;
+    cout << "    Enter the modifications you want: (explain) "<< endl;
+    cin.ignore();
+    getline(cin, modificationTicket.description); // Get details about the modification
+    cout << "    -----------------------------------------------------------" << endl;
+    cout << "    Your ticket for modifications:\n" << endl;
+    cout << "    Ticket Number: " << modificationTicket.ticketNumber << endl;
+    cout << "    Service Type: " << modificationTicket.serviceType << endl;
+    cout << "    \nDescription: " << modificationTicket.description << endl;
+    cout << "    -----------------------------------------------------------" << endl;
+    cout << "    Please visit the garage and submit \n    your ticket number to the mechanic!" << endl;
+}
