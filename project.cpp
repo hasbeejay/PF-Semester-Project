@@ -38,7 +38,7 @@ int main() {
 
     int choice;
     do {
-        cout << "\n\n      --- Welcome Mam. Kanwal to YSKI Automotive Management System ---\n\n";
+        cout << "\n\n      --- Welcome to YSKI Automotive Management System ---\n\n";
         cout << "            1. Car Sale\n";
         cout << "            2. Car Purchase\n";
         cout << "            3. Car Modifications\n";
@@ -166,7 +166,7 @@ void carPurchase(int& carsBought) {
     }
 
     string model;
-    int year, price;
+    int year; double price;
     while (file >> model >> year >> price) { // Read car details from the file
         availableCars.push_back({model, year, price});
     }

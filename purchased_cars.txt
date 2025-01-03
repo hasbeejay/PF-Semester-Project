@@ -1,0 +1,6 @@
+Model: Candra, Year: 2010, Price: $23467
+Model: Chevy, Year: 2017, Price: $34358
+Model: Delta, Year: 2012, Price: $21827
+Model: Imprez, Year: 2008, Price: $10436
+Model: Benz, Year: 2009, Price: $17382
+Model: CH-R, Year: 2016, Price: $26726

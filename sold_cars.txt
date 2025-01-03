@@ -1,0 +1,3 @@
+Model: Honda Civic, Year: 2005, Price: $20000, Suggested Price: $19500
+Model: Toyota Crolla, Year: 2007, Price: $30000, Suggested Price: $29250
+Model: Suzuki ALto, Year: 2009, Price: $10000, Suggested Price: $9750
