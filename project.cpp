@@ -260,3 +260,29 @@ void carModifications() {
     cout << "    -----------------------------------------------------------" << endl;
     cout << "    Please visit the garage and submit \n    your ticket number to the mechanic!" << endl;
 }
+
+// Process car inspections and reviews
+void carReviewsAndInspections() {
+    cout << "    ============================================================" << endl;
+    cout << "    Let's Start the Inspection Process!" << endl;
+    Ticket inspectionTicket;
+    inspectionTicket.ticketNumber = generateTicket();
+    inspectionTicket.serviceType = "Car Review & Inspection";
+    cout << "    -----------------------------------------------------------" << endl;
+    cout << "    Enter the problem you are facing with your car: "<< endl;
+    cin.ignore();
+    getline(cin, inspectionTicket.description); // Get the issue description
+    cout << "    -----------------------------------------------------------" << endl;
+    ofstream file("inspection_requests.txt", ios::app); // Save the inspection request to a file
+    if (file) {
+        file << "    Ticket: " << inspectionTicket.ticketNumber << ",  Service: " << inspectionTicket.serviceType
+             << ",  Problem: " << inspectionTicket.description << endl;
+        file.close();
+        cout << "    Inspection request submitted.\n    Your ticket number is: " << inspectionTicket.ticketNumber << endl;
+        cout << "    -----------------------------------------------------------" << endl;
+        cout << "    The Inspector will review your car and inform you shortly." << endl;
+        cout << "    Please submit the ticket number on counter to get the report" << endl;
+    } else {
+        cout << "    Error: Unable to save the inspection request.\n";
+    }
+}
