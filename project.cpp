@@ -82,3 +82,72 @@ void welcomeScreen() {
     cout << "        *                                    *\n";
     cout << "        **************************************\n";
 }
+
+// Generate a random ticket number
+int generateTicket() {
+    return rand() % 100000 + 10000;
+}
+
+// Process car sales
+void carSale(vector<Car>& cars, int& carsSold) {
+    cout << "    ============================================================" << endl;
+    cout << "    Let's Start the Sale Process!" << endl;
+
+    char sellAnother;
+    do {
+        Car newCar; // Create a new car object to store details
+        cout << "    -----------------------------------------------------------" << endl;
+        cout << "\n    Enter car model: ";
+        cin.ignore();
+        getline(cin, newCar.model); 
+        cout << "    -----------------------------------------------------------" << endl;
+        cout << "\n    Enter car year: ";
+        cin >> newCar.year; 
+        cout << "    -----------------------------------------------------------" << endl;
+        cout << "\n    Enter asking price: $";
+        cin >> newCar.price;
+        
+        int suggestedPrice = newCar.price * 0.975; // Suggest a selling price 2.5% less than the asking price
+        cout << "    -----------------------------------------------------------" << endl;
+        cout << "\n    Suggested selling price: $";
+        cout.precision(2);
+        cout << fixed << suggestedPrice << endl;
+
+        char confirm;
+        cout << "    -----------------------------------------------------------" << endl;
+        cout << "\n    Do you want to sell the car? (y/n): ";
+        cin >> confirm;
+
+        if (confirm == 'y' || confirm == 'Y') {
+            int buyerContact = rand() % 100000000 + 1000000; // Generate a random buyer contact number
+            cout << "    -----------------------------------------------------------" << endl;
+            cout << "\n    Car is listed for sale! Contact the buyer at: " << buyerContact << endl;
+            cars.push_back(newCar); // Add the car to the vector of cars
+            carsSold++; // Increment the count of cars sold
+
+            // Save the sold car details to a file
+            ofstream saleFile("sold_cars.txt", ios::app);
+            if (saleFile) {
+                saleFile << "Model: " << newCar.model << ", Year: " << newCar.year
+                         << ", Price: $" << newCar.price << ", Suggested Price: $"
+                         << suggestedPrice << endl;
+                saleFile.close();
+            }
+        } else {
+            cout << "    -----------------------------------------------------------" << endl;
+            cout << "\n    Car will not be listed for sale.\n";
+        }
+
+        cout << "    -----------------------------------------------------------" << endl;
+        cout << "\n    Do you want to sell another car? (y/n): ";
+        cin >> sellAnother;
+
+    } while (sellAnother == 'y' || sellAnother == 'Y');
+
+    // Save the total number of cars sold to a file
+    ofstream salesRecord("sales_record.txt", ios::app);
+    if (salesRecord) {
+        salesRecord << "Total cars sold: " << carsSold << endl;
+        salesRecord.close();
+    }
+}
