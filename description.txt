@@ -1,0 +1,4 @@
+The Automobile Management System simulates a variety of operations related to managing a car dealership. 
+	It allows users to interact with the system through a console-based menu to carry out car 
+	sales, purchases, modifications, and inspections. It saves records in text files for future reference 
+	and provides a unique ticketing system for each transaction or service request.
